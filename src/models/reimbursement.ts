@@ -4,20 +4,20 @@ export class Reimbursement {
     submitted: Date;
     resolved: Date;
     description: string;
-    authorId: number;
-    resolverId: number;
+    author: string;
+    resolver: string;
     status: string;
     reimType: string;
 
-    constructor(id:number,am: number,sub: Date, res: Date, des: string, aid: number, rid: number, st: string, ret: string){
+    constructor(id: number, amnt: number, subm: Date, resolved: Date, desc: string, author: string, resolver: string, status: string, reimtype: string){
         this.reimId = id;
-        this.amount = am;
-        this.submitted = sub;
-        this.resolved = res;
-        this.description = des;
-        this.authorId = aid;
-        this.resolverId = rid;
-        this.status = st;
-        this.reimType = ret;
+        this.amount = amnt;
+        this.submitted = subm;
+        this.resolved = resolved;
+        this.description = desc;
+        this.author = author;
+        this.resolver = resolver;
+        this.status = status;
+        this.reimType = reimtype; 
     }
 }

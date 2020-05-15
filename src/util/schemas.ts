@@ -1,7 +1,4 @@
-/**
- * 
- */
-export interface UserSchema {
+export interface EmployeeSchema {
     ers_user_id: number,
     username: string,
     password: string,
@@ -11,17 +8,14 @@ export interface UserSchema {
     role: string
 }
 
-/**
- * 
- */
 export interface ReimbursementSchema {
-    id: number;
-    amount: number;
-    submitted: Date;
-    resolved: Date;
-    description: string;
-    author: number;
-    resolver: number;
-    reimb_status_id: string;
-    reimb_type_id: string;
+    reimb_id: number,
+    amount: number,
+    submitted: Date,
+    resolved: Date,
+    description: string,
+    author: string,
+    resolver: string,
+    reimb_status: string,
+    reimb_type: string
 }

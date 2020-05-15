@@ -1,18 +1,19 @@
-
 import { Request, Response } from "express";
 import { AuthenticationError, AuthorizationError } from "../errors/errors";
 
-export const adminGuard = (request: Request, response: Response, next) => {
-    if(!request.session.principal) {
-        response.status(401).json(new AuthenticationError('No session found! Please provide valid login information.'));
-    } else if(request.session.principal.role_name === 'Admin' ) {
+export const adminGuard = (req: Request, resp: Response, next) => {
+
+    if (!req.session.principal) {
+        resp.status(401).json(new AuthenticationError('No session found! Please login.'));
+    } else if (req.session.principal.role === 'admin') {
         next();
     } else {
-        response.status(403).json(new AuthorizationError());
+        resp.status(403).json(new AuthorizationError());
     }
+
 }
 
-export const managerGuard = (req: Request, resp: Response, next) => {
+export const fmGuard = (req: Request, resp: Response, next) => {
 
     if (!req.session.principal) {
         resp.status(401).json(new AuthenticationError('No session found! Please login.'));
@@ -24,12 +25,14 @@ export const managerGuard = (req: Request, resp: Response, next) => {
 
 }
 
-export const UserGuard = (request: Request, response: Response, next) => {
-    if(!request.session.principal) {
-        response.status(401).json(new AuthenticationError('No session found! Please provide valid login information.'));
-    } else if(request.session.principal.role_name === 'Admin' || request.session.principal.role_name === 'Staff') {
+export const userGuard = (req: Request, resp: Response, next) => {
+
+    if (!req.session.principal) {
+        resp.status(401).json(new AuthenticationError('No session found! Please login.'));
+    } else if (req.session.principal.role === 'user') {
         next();
     } else {
-        response.status(403).json(new AuthorizationError());
+        resp.status(403).json(new AuthorizationError());
     }
-};
+
+}

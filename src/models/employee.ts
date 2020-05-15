@@ -1,5 +1,4 @@
-
-export class User {
+export class Employee {
     userId: number;
     username: string;
     password: string;

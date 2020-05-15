@@ -1,19 +1,17 @@
-import { UserSchema } from "./schemas";
-import { User } from "../models/user";
-import { ReimbursementSchema } from "./schemas";
+import { EmployeeSchema, ReimbursementSchema } from "./schemas";
+import { Employee } from "../models/employee";
 import { Reimbursement } from "../models/reimbursement";
-
 /**
  * 
  * @param resultSet 
  */
-export function mapUserResultSet(resultSet: UserSchema): User {
+export function mapEmployeeResultSet(resultSet: EmployeeSchema): Employee {
     
     if (!resultSet) {
-        return {} as User;
+        return {} as Employee;
     }
 
-    return new User(
+    return new Employee(
         resultSet.ers_user_id,
         resultSet.username,
         resultSet.password,
@@ -24,11 +22,6 @@ export function mapUserResultSet(resultSet: UserSchema): User {
     );
 }
 
-
-/**
- * 
- * @param resultSet 
- */
 export function mapReimbursementResultSet(resultSet: ReimbursementSchema): Reimbursement {
     
     if (!resultSet) {
@@ -36,14 +29,14 @@ export function mapReimbursementResultSet(resultSet: ReimbursementSchema): Reimb
     }
 
     return new Reimbursement(
-        resultSet.id,
+        resultSet.reimb_id,
         resultSet.amount,
         resultSet.submitted,
         resultSet.resolved,
         resultSet.description,
         resultSet.author,
         resultSet.resolver,
-        resultSet.reimb_status_id,
-        resultSet.reimb_type_id
+        resultSet.reimb_status,
+        resultSet.reimb_type
     );
 }

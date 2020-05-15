@@ -1,16 +1,10 @@
-import { UserRepository } from "../repos/user-repo";
-import { UserService } from "../services/user-service";
-// import { ReimbursementRepository } from "../repos/reimbursement-repo";
-// import { ReimbursementService } from "../services/reimbursement-service";
+import { EmployeeRepository } from "../repos/employee-repo";
+import { EmployeeService } from "../services/employee-service";
 
-const userRepo = new UserRepository();
-const userService = new UserService(userRepo);
-
-// const reimbRepo = new ReimbursementRepository();
-// const reimbursementService = new ReimbursementService(reimbRepo);
+const employeeRepo = new EmployeeRepository();
+const employeeService = new EmployeeService(employeeRepo);
 
 
 export default {
-    userService
-    // reimbursementService
+    employeeService
 }
