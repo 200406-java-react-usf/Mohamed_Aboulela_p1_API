@@ -1,93 +1,123 @@
-class ApplicationError {
+class ResourceNotFoundError {
 
-    statusCode: number;
     message: string;
-    reason: string;
-    timestamp: Date;
+    statusCode: number;
 
-    constructor(statusCode: number, rsn?: string) {
-        this.statusCode = statusCode;
-        this.message = 'An unexpected error occurred.';
-        this.timestamp = new Date();
-        rsn ? (this.reason = rsn) : this.reason = 'Unspecified reason.';
-    }
+    constructor(message?: string){
 
-    setMessage(message: string) {
-        this.message = message;
-    }
+        this.statusCode = 404;
 
-}
+        if(!message){
+            this.message = 'Resource not Found';
+        } else {
+            this.message = message;
+        }
 
-class ResourcePersistenceError extends ApplicationError {
-
-    constructor(reason?: string) {
-        super(409, reason);
-        super.setMessage('The resource was not persisted.');
-    }
-    
-}
-
-class ResourceNotFoundError extends ApplicationError {
-
-    constructor(reason?: string) {
-        super(404, reason);
-        super.setMessage('No resource found using provided criteria.');
-    }
-    
-}
-
-class BadRequestError extends ApplicationError {
-
-    constructor(reason?: string) {
-        super(400, reason);
-        super.setMessage('Invalid parameters provided.');
     }
 
 }
 
-class AuthenticationError extends ApplicationError {
+class InvalidInputError {
 
-    constructor(reason?: string) {
-        super(401, reason);
-        super.setMessage('Authentication failed.');
+    message: string;
+    statusCode: number;
+
+    constructor(message?: string){
+
+        this.statusCode = 400;
+
+        if(!message){
+            this.message = 'Invalid Inputs';
+        } else {
+            this.message = message;
+        }
+
     }
 
 }
 
-class AuthorizationError extends ApplicationError {
+class ResourceConflictError {
 
-    constructor(reason?: string) {
-        super(403, reason);
-        super.setMessage('You do not have permission to access this resource!');
+    message: string;
+    statusCode: number;
+
+    constructor(reason?: string){
+
+        this.statusCode = 409;
+
+        if(!reason){
+            this.message = 'Resource Conflict Error';
+        } else{
+            this.message = reason;
+        }
+
+
     }
 
 }
 
-class InternalServerError extends ApplicationError {
+class AuthenticationError {
 
-    constructor(reason?: string) {
-        super(500, reason);
-        super.setMessage('An unexpected error occurred.');
+    message: string;
+    statusCode: number;
+
+    constructor(reason?: string){
+
+        this.statusCode = 401;
+
+        if(!reason){
+            this.message = 'Invalid Credentials';
+        }else{
+            this.message = reason;
+        }
+        
     }
 
 }
 
-class NotImplementedError extends ApplicationError {
+class AuthorizationError {
 
-    constructor(reason?: string) {
-        super(501, reason);
-        super.setMessage('No implementation yet!');
+    message: string;
+    statusCode: number;
+
+    constructor(reason?: string){
+
+        this.statusCode = 403;
+
+        if(!reason){
+            this.message = 'You\'re not Authorized to view this page';
+        }else{
+            this.message = reason;
+        }
+        
     }
 
 }
 
+class InternalServerError {
+
+    message: string;
+    statusCode: number;
+
+    constructor(reason?: string){
+
+        this.statusCode = 500;
+
+        if(!reason){
+            this.message = 'Internal Server Error';
+        }else{
+            this.message = reason;
+        }
+        
+    }
+
+}
 
 export {
     ResourceNotFoundError,
-    ResourcePersistenceError,
-    BadRequestError,
     AuthenticationError,
-    NotImplementedError,
-    AuthorizationError,
-    InternalServerError
+    ResourceConflictError,
+    InvalidInputError,
+    InternalServerError,
+    AuthorizationError
 };

@@ -3,11 +3,14 @@ import express from 'express';
 import fs from 'fs';
 import morgan from 'morgan';
 import path from 'path';
+
+
+import { UserRouter } from './routers/user-router';
+//import { ReimbursementRouter } from './routers/reimbursement-router';
+import { AuthRouter } from './routers/auth-router';
 import { sessionMiddleware } from './middleware/session-middleware';
 import { corsFilter } from './middleware/cors-filter';
 import { Pool } from 'pg';
-import { EmployeeRouter } from './routers/employee-router';
-import { AuthRouter } from './routers/auth-router';
 
 // environment configuration
 dotenv.config();
@@ -32,10 +35,16 @@ app.use(morgan('combined', { stream: logStream }));
 app.use(sessionMiddleware);
 app.use(corsFilter);
 app.use('/', express.json());
-app.use('/employees', EmployeeRouter);
+app.use('/users', UserRouter);
+//app.use('/reimbursements', ReimbursementRouter);
 app.use('/auth', AuthRouter);
 
+app.get('/', (req,resp) => {
+
+    resp.send('THIS WORKS');
+
+});
 
 app.listen(8080, () => {
-    console.log(`Application running and listening at: `);
+    console.log(`Application running and listening at: http://localhost:8080`);
 });

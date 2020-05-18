@@ -1,42 +1,45 @@
-import { EmployeeSchema, ReimbursementSchema } from "./schemas";
-import { Employee } from "../models/employee";
-import { Reimbursement } from "../models/reimbursement";
-/**
- * 
- * @param resultSet 
- */
-export function mapEmployeeResultSet(resultSet: EmployeeSchema): Employee {
-    
-    if (!resultSet) {
-        return {} as Employee;
+import {UserSchema, ReimbursementSchema} from './schemas';
+import {User} from '../models/user';
+import {Reimbursements} from '../models/reimbursements';
+
+export function mapUserResultSet(resultSet: UserSchema): User{
+
+    if(!resultSet){
+        return {} as User;
     }
 
-    return new Employee(
-        resultSet.ers_user_id,
+    return new User(
+
+        resultSet.user_id,
         resultSet.username,
         resultSet.password,
         resultSet.first_name,
         resultSet.last_name,
         resultSet.email,
-        resultSet.role
+        resultSet.user_role_id
+
     );
+
 }
 
-export function mapReimbursementResultSet(resultSet: ReimbursementSchema): Reimbursement {
-    
-    if (!resultSet) {
-        return {} as Reimbursement;
+export function mapReimbursementResultSet(resultSet: ReimbursementSchema): Reimbursements{
+
+    if(!resultSet){
+        return {} as Reimbursements;
     }
 
-    return new Reimbursement(
+    return new Reimbursements(
+
         resultSet.reimb_id,
         resultSet.amount,
         resultSet.submitted,
         resultSet.resolved,
         resultSet.description,
-        resultSet.author,
-        resultSet.resolver,
-        resultSet.reimb_status,
-        resultSet.reimb_type
+        resultSet.author_id,
+        resultSet.resolver_id,
+        resultSet.reimb_status_id,
+        resultSet.reimb_type_id
+
     );
+
 }
